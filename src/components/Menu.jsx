@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { menuData } from '../data/menuData';
 import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'react-hot-toast';
+import { useCart } from '../context/CartContext';
 
 const Menu = () => {
+    const { addToCart } = useCart();
     const [filter, setFilter] = useState('All');
 
     const filteredItems = filter === 'All'
@@ -34,8 +35,8 @@ const Menu = () => {
                             key={cat}
                             onClick={() => setFilter(cat)}
                             className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${filter === cat
-                                    ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/30 scale-105'
-                                    : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-brand-primary border border-gray-200'
+                                ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/30 scale-105'
+                                : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-brand-primary border border-gray-200'
                                 }`}
                         >
                             {cat}
@@ -70,8 +71,8 @@ const Menu = () => {
                                         {item.price}
                                     </div>
                                     <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md uppercase tracking-wide ${item.category === 'Veg' ? 'bg-green-600' :
-                                            item.category === 'Non-Veg' ? 'bg-red-600' :
-                                                'bg-yellow-500'
+                                        item.category === 'Non-Veg' ? 'bg-red-600' :
+                                            'bg-yellow-500'
                                         }`}>
                                         {item.category}
                                     </div>
@@ -80,11 +81,8 @@ const Menu = () => {
                                     <h3 className="text-xl font-bold text-brand-dark mb-2 font-serif group-hover:text-brand-primary transition-colors">{item.name}</h3>
                                     <p className="text-gray-500 text-sm mb-6 line-clamp-2 leading-relaxed">{item.description}</p>
                                     <div className="flex items-center justify-between">
-                                        <button 
-                                            onClick={() => toast.success(`${item.name} added to your order!`, {
-                                                style: { background: '#1F2937', color: '#fff' },
-                                                iconTheme: { primary: '#EF4444', secondary: '#fff' }
-                                            })}
+                                        <button
+                                            onClick={() => addToCart(item)}
                                             className="w-full bg-brand-light text-brand-dark hover:bg-brand-primary hover:text-white font-medium py-3 rounded-xl transition-colors duration-300 flex items-center justify-center space-x-2"
                                         >
                                             <span>Add to Order</span>

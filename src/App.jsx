@@ -7,6 +7,7 @@ import Menu from './components/Menu';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Cart from './components/Cart';
 
 import { Toaster } from 'react-hot-toast';
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white selection:bg-brand-primary selection:text-white">
       <Toaster position="top-right" />
+      <Cart />
       <Navbar />
       <Hero />
       <Opening />

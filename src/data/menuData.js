@@ -34,7 +34,7 @@ export const menuData = [
         
     },
     {
-        id: 4,
+        id: 11,
         name: "Chicken Butter Masala",
         description: "Tender chicken pieces in a rich tomato and butter gravy.",
         price: "₹350",

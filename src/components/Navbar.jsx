@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
+    const { cartCount, toggleCart } = useCart();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -46,10 +48,35 @@ const Navbar = () => {
                         <a href="#menu" className="bg-brand-primary text-white px-5 py-2 rounded-full hover:bg-red-600 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                             Order Now
                         </a>
+                        
+                        {/* Shopping Cart Icon (Desktop) */}
+                        <button 
+                            onClick={toggleCart} 
+                            className={`relative p-2 rounded-full transition-colors ${scrolled ? 'text-gray-700 hover:text-brand-primary hover:bg-gray-100' : 'text-white hover:text-brand-secondary hover:bg-white/10'}`}
+                        >
+                            <ShoppingCart size={24} />
+                            {cartCount > 0 && (
+                                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-600 rounded-full">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </button>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden flex items-center">
+                    {/* Mobile Menu Button & Cart Icon */}
+                    <div className="md:hidden flex items-center space-x-4">
+                        {/* Shopping Cart Icon (Mobile) */}
+                        <button 
+                            onClick={toggleCart} 
+                            className={`relative p-2 rounded-full transition-colors ${scrolled ? 'text-gray-700 hover:text-brand-primary' : 'text-white hover:text-brand-secondary'}`}
+                        >
+                            <ShoppingCart size={24} />
+                            {cartCount > 0 && (
+                                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-600 rounded-full">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </button>
                         <button onClick={() => setIsOpen(!isOpen)} className={`${scrolled ? 'text-gray-800' : 'text-white'}`}>
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
