@@ -8,9 +8,12 @@ import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+import { Toaster } from 'react-hot-toast';
+
 function App() {
   return (
     <div className="min-h-screen bg-white selection:bg-brand-primary selection:text-white">
+      <Toaster position="top-right" />
       <Navbar />
       <Hero />
       <Opening />

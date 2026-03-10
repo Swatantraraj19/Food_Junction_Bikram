@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { menuData } from '../data/menuData';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'react-hot-toast';
 
 const Menu = () => {
     const [filter, setFilter] = useState('All');
@@ -79,7 +80,13 @@ const Menu = () => {
                                     <h3 className="text-xl font-bold text-brand-dark mb-2 font-serif group-hover:text-brand-primary transition-colors">{item.name}</h3>
                                     <p className="text-gray-500 text-sm mb-6 line-clamp-2 leading-relaxed">{item.description}</p>
                                     <div className="flex items-center justify-between">
-                                        <button className="w-full bg-brand-light text-brand-dark hover:bg-brand-primary hover:text-white font-medium py-3 rounded-xl transition-colors duration-300 flex items-center justify-center space-x-2">
+                                        <button 
+                                            onClick={() => toast.success(`${item.name} added to your order!`, {
+                                                style: { background: '#1F2937', color: '#fff' },
+                                                iconTheme: { primary: '#EF4444', secondary: '#fff' }
+                                            })}
+                                            className="w-full bg-brand-light text-brand-dark hover:bg-brand-primary hover:text-white font-medium py-3 rounded-xl transition-colors duration-300 flex items-center justify-center space-x-2"
+                                        >
                                             <span>Add to Order</span>
                                         </button>
                                     </div>
