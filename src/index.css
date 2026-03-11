@@ -7,6 +7,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* Offsets scroll position by the height of the fixed navbar */
   }
 
   body {
