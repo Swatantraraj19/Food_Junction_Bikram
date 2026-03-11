@@ -38,33 +38,41 @@ const Navbar = () => {
                         </a>
                     </div>
 
-                    {/* Desktop Menu */}
+                    {/* Desktop Navigation Links */}
                     <div className="hidden md:flex space-x-8 items-center">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className={`font-medium transition-colors duration-200 ${scrolled ? 'text-gray-700 hover:text-brand-primary' : 'text-white hover:text-brand-secondary'}`}
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a href="#menu" className="bg-brand-primary text-white px-5 py-2 rounded-full hover:bg-red-600 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                            Order Now
-                        </a>
+                        <ul className="flex space-x-8">
+                            {navLinks.map((link) => (
+                                <li key={link.name}>
+                                    <a
+                                        href={link.href}
+                                        className={`font-medium transition-colors duration-200 ${scrolled ? 'text-gray-700 hover:text-brand-primary' : 'text-white hover:text-brand-secondary'}`}
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                         
-                        {/* Shopping Cart Icon (Desktop) */}
-                        <button 
-                            onClick={toggleCart} 
-                            className={`relative p-2 rounded-full transition-colors ${scrolled ? 'text-gray-700 hover:text-brand-primary hover:bg-gray-100' : 'text-white hover:text-brand-secondary hover:bg-white/10'}`}
-                        >
-                            <ShoppingCart size={24} />
-                            {cartCount > 0 && (
-                                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-600 rounded-full">
-                                    {cartCount}
-                                </span>
-                            )}
-                        </button>
+                        {/* Call to Action & Cart (Desktop) */}
+                        <div className="flex items-center space-x-4">
+                            <a href="#menu" className="bg-brand-primary text-white px-5 py-2 rounded-full hover:bg-red-600 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                Order Now
+                            </a>
+                        
+                            {/* Shopping Cart Icon (Desktop) */}
+                            <button 
+                                onClick={toggleCart} 
+                                aria-label="Open Shopping Cart"
+                                className={`relative p-2 rounded-full transition-colors ${scrolled ? 'text-gray-700 hover:text-brand-primary hover:bg-gray-100' : 'text-white hover:text-brand-secondary hover:bg-white/10'}`}
+                            >
+                                <ShoppingCart size={24} />
+                                {cartCount > 0 && (
+                                    <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-600 rounded-full">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </button>
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button & Cart Icon */}
@@ -72,6 +80,7 @@ const Navbar = () => {
                         {/* Shopping Cart Icon (Mobile) */}
                         <button 
                             onClick={toggleCart} 
+                            aria-label="Open Shopping Cart"
                             className={`relative p-2 rounded-full transition-colors ${scrolled ? 'text-gray-700 hover:text-brand-primary' : 'text-white hover:text-brand-secondary'}`}
                         >
                             <ShoppingCart size={24} />
@@ -81,7 +90,12 @@ const Navbar = () => {
                                 </span>
                             )}
                         </button>
-                        <button onClick={() => setIsOpen(!isOpen)} className={`${scrolled ? 'text-gray-800' : 'text-white'}`}>
+                        <button 
+                            onClick={() => setIsOpen(!isOpen)} 
+                            aria-label={isOpen ? "Close Menu" : "Open Menu"}
+                            aria-expanded={isOpen}
+                            className={`${scrolled ? 'text-gray-800' : 'text-white'} p-1`}
+                        >
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
@@ -95,17 +109,20 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="md:hidden bg-white shadow-xl absolute w-full left-0 top-full border-t"
                 >
-                    <div className="px-4 pt-2 pb-6 space-y-2">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 rounded-md"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.name}
-                            </a>
-                        ))}
+                    <div className="px-4 pt-2 pb-6">
+                        <ul className="space-y-2">
+                            {navLinks.map((link) => (
+                                <li key={link.name}>
+                                    <a
+                                        href={link.href}
+                                        className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 rounded-md"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                         <a 
                             href="#menu" 
                             className="block px-3 py-2 mt-4 text-center text-base font-medium text-white bg-brand-primary hover:bg-red-600 rounded-md shadow-md"

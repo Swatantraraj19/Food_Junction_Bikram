@@ -1,8 +1,13 @@
-import { Calendar, PartyPopper } from 'lucide-react';
+import { PartyPopper, MessageCircle } from 'lucide-react';
 
 const Opening = () => {
+    // Use the officially provided WhatsApp number
+    const whatsappNumber = "917091380430"; 
+    const whatsappMessage = encodeURIComponent("Hi! I would like to book a party/table at Food Junction Bikram.");
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
     return (
-        <section className="bg-gradient-to-r from-brand-primary to-orange-500 py-16 text-white overflow-hidden relative shadow-inner">
+        <section id="opening" className="bg-gradient-to-r from-brand-primary to-orange-500 py-16 text-white overflow-hidden relative shadow-inner">
             <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-repeat" style={{ backgroundImage: 'radial-gradient(circle, white 2px, transparent 2.5px)', backgroundSize: '20px 20px' }}></div>
 
             <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10 gap-8 text-center md:text-left">
@@ -11,17 +16,25 @@ const Opening = () => {
                         <PartyPopper size={48} className="" />
                     </div>
                     <div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-2 leading-tight">Special Offer</h2>
-                        <p className="text-white/90 text-xl font-medium">Delicious taste at the best price!</p>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-2 leading-tight">Book For Parties</h2>
+                        <p className="text-white/90 text-xl font-medium">Celebrate your special moments with us!</p>
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md px-10 py-6 rounded-2xl border border-white/20 shadow-2xl skew-x-[-10deg] transform hover:skew-x-0 transition-transform cursor-default">
-                    <div className="skew-x-[10deg] flex items-center space-x-4">
-                        <Calendar size={32} className="text-yellow-300" />
-                        <span className="text-3xl lg:text-4xl font-bold font-mono tracking-widest text-shadow">Till 15 FEB 2026</span>
+                <a 
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center bg-white text-brand-dark hover:bg-gray-100 px-8 py-5 rounded-2xl shadow-2xl transition-all transform hover:scale-105 group border-4 border-white/20 bg-clip-padding"
+                >
+                    <div className="flex items-center space-x-4">
+                        <MessageCircle size={36} className="text-[#25D366] group-hover:animate-pulse" />
+                        <div className="flex flex-col text-left">
+                            <span className="text-xl font-bold tracking-wide leading-tight mt-1">Book via WhatsApp</span>
+                            <span className="text-base font-semibold text-gray-500">+91 7091380430</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
     )

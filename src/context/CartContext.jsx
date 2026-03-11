@@ -47,14 +47,14 @@ export const CartProvider = ({ children }) => {
   // A function to increase/decrease quantity (+ or - buttons)
   const updateQuantity = (itemId, changeAmount) => {
     setCartItems((prevList) => {
-      return prevList.map((item) => {
-        if (item.id === itemId) {
-          const newTotal = item.quantity + changeAmount;
-          // Don't let quantity drop below 1 (they should use 'remove' instead)
-          return newTotal > 0 ? { ...item, quantity: newTotal } : item;
-        }
-        return item;
-      });
+      return prevList
+        .map((item) => {
+          if (item.id === itemId) {
+            return { ...item, quantity: item.quantity + changeAmount };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0); // Remove item automatically if it drops below 1
     });
   };
 

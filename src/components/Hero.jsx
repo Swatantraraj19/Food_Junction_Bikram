@@ -7,7 +7,7 @@ const Hero = () => {
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed transform scale-105"
                 style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1920')", // A rich table spread
+                    backgroundImage: "url('/Hero_bg.avif')", // A rich table spread
                 }}
             >
                 {/* Darker gradient for better text readability */}
