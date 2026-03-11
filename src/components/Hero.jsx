@@ -71,12 +71,12 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
-                    className="flex flex-col sm:flex-row gap-4 justify-center"
+                    className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full"
                 >
-                    <a href="#menu" className="bg-brand-primary text-white border border-brand-primary px-7 py-2.5 rounded-full text-base font-semibold hover:bg-transparent hover:text-white transition-all transform hover:scale-105 shadow-lg shadow-red-900/40 tracking-wide uppercase">
+                    <a href="#menu" className="bg-brand-primary text-white border border-brand-primary px-6 py-2.5 sm:px-7 sm:py-2.5 rounded-full text-sm sm:text-base font-semibold hover:bg-transparent hover:text-white transition-all transform hover:scale-105 shadow-lg shadow-red-900/40 tracking-wide uppercase text-center min-w-[140px]">
                         View Menu
                     </a>
-                    <a href="#contact" className="bg-transparent text-white border border-white/60 px-7 py-2.5 rounded-full text-base font-semibold hover:bg-white hover:text-brand-dark transition-all transform hover:scale-105 backdrop-blur-sm tracking-wide uppercase">
+                    <a href="#contact" className="bg-transparent text-white border border-white/60 px-6 py-2.5 sm:px-7 sm:py-2.5 rounded-full text-sm sm:text-base font-semibold hover:bg-white hover:text-brand-dark transition-all transform hover:scale-105 backdrop-blur-sm tracking-wide uppercase text-center min-w-[140px]">
                         Visit Us
                     </a>
                 </motion.div>

@@ -25,13 +25,13 @@ const Opening = () => {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center bg-white text-brand-dark hover:bg-gray-100 px-8 py-5 rounded-2xl shadow-2xl transition-all transform hover:scale-105 group border-4 border-white/20 bg-clip-padding"
+                    className="flex items-center justify-center bg-white text-brand-dark hover:bg-gray-100 px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-xl transition-all w-full md:w-auto transform hover:scale-105 group border-4 border-white/20 bg-clip-padding"
                 >
-                    <div className="flex items-center space-x-4">
-                        <MessageCircle size={36} className="text-[#25D366] group-hover:animate-pulse" />
+                    <div className="flex items-center gap-3 md:gap-4">
+                        <MessageCircle size={32} className="text-[#25D366] group-hover:animate-pulse md:w-9 md:h-9" />
                         <div className="flex flex-col text-left">
-                            <span className="text-xl font-bold tracking-wide leading-tight mt-1">Book via WhatsApp</span>
-                            <span className="text-base font-semibold text-gray-500">+91 7091380430</span>
+                            <span className="text-lg md:text-xl font-bold tracking-wide leading-tight">Book via WhatsApp</span>
+                            <span className="text-sm md:text-base font-semibold text-gray-500">+91 7091380430</span>
                         </div>
                     </div>
                 </a>

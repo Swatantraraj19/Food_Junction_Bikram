@@ -107,15 +107,15 @@ const Navbar = () => {
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="md:hidden bg-white shadow-xl absolute w-full left-0 top-full border-t"
+                    className="md:hidden absolute w-full left-0 top-full bg-white/95 backdrop-blur-md shadow-2xl border-t border-gray-100"
                 >
-                    <div className="px-4 pt-2 pb-6">
-                        <ul className="space-y-2">
-                            {navLinks.map((link) => (
+                    <div className="px-6 pt-4 pb-8">
+                        <ul className="flex flex-col">
+                            {navLinks.map((link, index) => (
                                 <li key={link.name}>
                                     <a
                                         href={link.href}
-                                        className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-primary hover:bg-gray-50 rounded-md"
+                                        className={`block py-4 text-base font-semibold tracking-wide text-gray-800 hover:text-brand-primary transition-colors ${index !== navLinks.length - 1 ? 'border-b border-gray-100' : ''}`}
                                         onClick={() => setIsOpen(false)}
                                     >
                                         {link.name}
@@ -123,13 +123,15 @@ const Navbar = () => {
                                 </li>
                             ))}
                         </ul>
-                        <a 
-                            href="#menu" 
-                            className="block px-3 py-2 mt-4 text-center text-base font-medium text-white bg-brand-primary hover:bg-red-600 rounded-md shadow-md"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Order Now
-                        </a>
+                        <div className="mt-6">
+                            <a 
+                                href="#menu" 
+                                className="flex justify-center w-full px-4 py-3 text-base font-bold tracking-wider text-white uppercase transition bg-brand-primary hover:bg-red-600 rounded-xl shadow-lg shadow-red-500/30"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Order Now
+                            </a>
+                        </div>
                     </div>
                 </motion.div>
             )}
