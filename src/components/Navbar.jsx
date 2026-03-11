@@ -102,6 +102,13 @@ const Navbar = () => {
                                 {link.name}
                             </a>
                         ))}
+                        <a 
+                            href="#menu" 
+                            className="block px-3 py-2 mt-4 text-center text-base font-medium text-white bg-brand-primary hover:bg-red-600 rounded-md shadow-md"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Order Now
+                        </a>
                     </div>
                 </motion.div>
             )}
