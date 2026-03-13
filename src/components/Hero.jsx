@@ -82,16 +82,16 @@ const Hero = () => {
                 </motion.div>
             </div>
 
-            {/* Floating Scroll Indicator */}
+            {/* Floating Scroll Indicator - Fixed centering to ensure perfect symmetry */}
             <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                className="absolute bottom-8 left-0 right-0 flex justify-center pointer-events-none"
             >
                 <a 
                     href="#opening"
                     aria-label="Scroll to Special Offer section"
-                    className="flex justify-center pt-2 w-6 h-10 border-2 border-white/50 rounded-full text-white/50 hover:border-white hover:text-white transition-colors cursor-pointer"
+                    className="flex justify-center pt-2 w-6 h-10 border-2 border-white/50 rounded-full text-white/50 hover:border-white hover:text-white transition-colors cursor-pointer pointer-events-auto"
                 >
                     <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
                 </a>
