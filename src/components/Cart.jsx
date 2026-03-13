@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 // 1. Standalone CartFooter for clean architecture
 const CartFooter = ({ cartTotal, cartItems, orderNotes, clearCart, toggleCart }) => {
   const handleConfirmOrder = () => {
+    if (cartItems.length === 0) return; // Prevent empty orders
+    
     const whatsappNumber = "917091380430";
     const now = new Date();
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -136,7 +138,7 @@ const Cart = () => {
               </div>
             </div>
 
-            {/* Content Area                {/* Custom Styled Scrollbar for Premium Feel */}
+            {/* Main Cart Content Area */}
             <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar scroll-smooth">
               {cartItems.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center">
@@ -220,13 +222,6 @@ const Cart = () => {
                     ))}
                   </motion.div>
 
-                   {/* Premium Medal Aesthetic for EST Year */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 flex flex-col items-center justify-center rounded-full bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(212,175,55,0.1)] border-8 border-[#faf9f6] z-10 group-hover:scale-110 transition-transform duration-700">
-                    <div className="absolute inset-2 border border-brand-primary/20 rounded-full border-dashed animate-[spin_10s_linear_infinite]"></div>
-                    <span className="text-3xl font-black text-brand-dark tracking-tighter leading-none mb-1">2026</span>
-                    <div className="h-[2px] w-8 bg-brand-primary/30 mb-1 rounded-full"></div>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Est. Year</span>
-                </div>
                    <div className="bg-gray-50/50 rounded-2xl p-4 border border-gray-100/50 shadow-inner">
                      <div className="flex items-center gap-2 mb-3 px-1">
                        <div className="w-1 h-3 bg-brand-primary rounded-full"></div>
@@ -244,15 +239,17 @@ const Cart = () => {
             </div>
 
             {/* Footer Section with improved spacing and separation */}
-            <div className="mt-auto border-t border-gray-100 shadow-[0_-15px_30px_rgba(0,0,0,0.03)] bg-white pt-2">
-              <CartFooter 
-                cartTotal={cartTotal} 
-                cartItems={cartItems} 
-                orderNotes={orderNotes} 
-                clearCart={clearCart} 
-                toggleCart={toggleCart} 
-              />
-            </div>
+            {cartItems.length > 0 && (
+              <div className="mt-auto border-t border-gray-100 shadow-[0_-15px_30px_rgba(0,0,0,0.03)] bg-white pt-2">
+                <CartFooter 
+                  cartTotal={cartTotal} 
+                  cartItems={cartItems} 
+                  orderNotes={orderNotes} 
+                  clearCart={clearCart} 
+                  toggleCart={toggleCart} 
+                />
+              </div>
+            )}
           </motion.div>
         </>
       )}
