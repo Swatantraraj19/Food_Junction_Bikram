@@ -73,10 +73,10 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.8 }}
                     className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full"
                 >
-                    <a href="#menu" className="bg-brand-primary text-white border border-brand-primary px-8 py-3.5 rounded-full text-base font-bold hover:bg-red-600 transition-all transform hover:scale-105 shadow-xl shadow-red-900/40 tracking-[0.1em] uppercase text-center min-w-[170px]">
+                    <a href="#menu" className="bg-brand-primary text-white border border-brand-primary px-6 py-2.5 md:px-8 md:py-3.5 rounded-full text-sm md:text-base font-bold hover:bg-red-600 transition-all transform hover:scale-105 shadow-xl shadow-red-900/40 tracking-[0.1em] uppercase text-center min-w-[140px] md:min-w-[170px]">
                         Order Now
                     </a>
-                    <a href="#contact" className="bg-white/10 text-white border border-white/40 px-8 py-3.5 rounded-full text-base font-bold hover:bg-white hover:text-brand-dark transition-all transform hover:scale-105 backdrop-blur-md tracking-[0.1em] uppercase text-center min-w-[170px]">
+                    <a href="#contact" className="bg-white/10 text-white border border-white/40 px-6 py-2.5 md:px-8 md:py-3.5 rounded-full text-sm md:text-base font-bold hover:bg-white hover:text-brand-dark transition-all transform hover:scale-105 backdrop-blur-md tracking-[0.1em] uppercase text-center min-w-[140px] md:min-w-[170px]">
                         Visit Us
                     </a>
                 </motion.div>
