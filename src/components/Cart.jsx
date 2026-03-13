@@ -62,7 +62,7 @@ const CartFooter = ({ cartTotal, cartItems, orderNotes, clearCart, toggleCart })
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
       </button>
-      <p className="text-[10px] text-gray-400 mt-4 text-center uppercase tracking-[0.2em] font-bold italic opacity-60">Handcrafted with passion</p>
+      <p className="text-[10px] text-gray-500 mt-4 text-center uppercase tracking-[0.25em] font-black italic opacity-40">Taste that makes you smile</p>
     </div>
   );
 };
@@ -227,12 +227,12 @@ const Cart = () => {
                        <div className="w-1 h-3 bg-brand-primary rounded-full"></div>
                        <label className="text-[11px] font-black text-brand-dark/50 uppercase tracking-[0.15em] block">Kitchen Notes</label>
                      </div>
-                     <textarea 
-                       value={orderNotes}
-                       onChange={(e) => setOrderNotes(e.target.value)}
-                       placeholder="e.g., Make it extra spicy, less oil, etc."
-                       className="w-full bg-white border border-gray-100 rounded-xl p-4 text-sm focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary/20 outline-none transition-all resize-none h-24 text-brand-dark shadow-sm placeholder:text-gray-300 font-medium"
-                     ></textarea>
+                      <textarea 
+                        value={orderNotes}
+                        onChange={(e) => setOrderNotes(e.target.value)}
+                        placeholder="e.g., Make it extra spicy, less oil, etc."
+                        className="w-full bg-white border border-gray-200 rounded-xl p-4 text-sm focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary/30 outline-none transition-all resize-none h-24 text-brand-dark shadow-sm placeholder:text-gray-400 font-medium"
+                      ></textarea>
                    </div>
                 </div>
               )}

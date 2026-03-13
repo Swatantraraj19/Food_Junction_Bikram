@@ -7,20 +7,20 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem; /* Offsets scroll position by the height of the fixed navbar */
+    scroll-padding-top: 5rem; /* Offsets scroll position for fixed header */
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
     @apply font-sans antialiased text-gray-800 bg-white overflow-x-hidden;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif text-brand-dark;
+  h1, h2, h3, h4 {
+    @apply font-serif text-brand-dark leading-tight;
+  }
+
+  p {
+    @apply leading-relaxed;
   }
 }
 
