@@ -45,7 +45,7 @@ const CartFooter = ({ cartTotal, cartItems, orderNotes, clearCart, toggleCart })
       <div className="space-y-3 mb-6">
         <div className="flex justify-between items-center py-1 px-2 md:px-3">
           <span className="font-serif font-bold text-lg text-brand-dark tracking-tight">Total Amount</span>
-          <span className="font-serif font-bold text-3xl text-brand-primary drop-shadow-sm">₹{cartTotal}</span>
+          <span className="font-sans font-black text-3xl text-brand-primary tabular-nums tracking-tighter drop-shadow-sm">₹{cartTotal}</span>
         </div>
       </div>
       
@@ -57,7 +57,7 @@ const CartFooter = ({ cartTotal, cartItems, orderNotes, clearCart, toggleCart })
           <span className="tracking-[0.15em] uppercase text-[12px] font-black">Confirm Order</span>
           <div className="flex items-center gap-3">
             <div className="w-1 h-1 rounded-full bg-white animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
-            <span className="text-xl font-serif">₹{cartTotal}</span>
+            <span className="text-xl font-sans font-black tabular-nums tracking-tighter">₹{cartTotal}</span>
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
@@ -197,7 +197,7 @@ const Cart = () => {
                           </div>
                           
                           <div className="flex items-center justify-between border-t border-gray-50 pt-2.5">
-                            <p className="font-black text-brand-primary text-lg tracking-tight">
+                            <p className="font-black text-brand-primary text-lg tracking-tight tabular-nums">
                               {typeof item.price === 'string' ? item.price : `₹${item.price}`}
                             </p>
                             

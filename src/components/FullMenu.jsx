@@ -103,7 +103,7 @@ const FullMenu = ({ isOpen, onClose }) => {
                                                     >
                                                         <div className="flex flex-col items-start">
                                                             <span className="text-gray-400 text-[10px] uppercase font-bold tracking-widest group-hover/btn:text-[#d4af37]/70 transition-colors">Half</span>
-                                                            <span className="text-white font-bold text-base md:text-xl">{item.prices.half}</span>
+                                                            <span className="text-white font-bold text-base md:text-xl tabular-nums">{item.prices.half}</span>
                                                         </div>
                                                         <div className="w-8 h-8 rounded-full bg-[#d4af37] flex items-center justify-center text-black shadow-lg group-hover/btn:rotate-90 transition-transform duration-300">
                                                             <Plus size={18} strokeWidth={3} />
@@ -117,7 +117,7 @@ const FullMenu = ({ isOpen, onClose }) => {
                                                     >
                                                         <div className="flex flex-col items-start">
                                                             {(!hideLabel || hasBoth) && <span className="text-gray-400 text-[10px] uppercase font-bold tracking-widest group-hover/btn:text-[#d4af37]/70 transition-colors">Full</span>}
-                                                            <span className="text-white font-bold text-base md:text-xl">{item.prices.full}</span>
+                                                            <span className="text-white font-bold text-base md:text-xl tabular-nums">{item.prices.full}</span>
                                                         </div>
                                                         <div className="w-8 h-8 rounded-full bg-[#d4af37] flex items-center justify-center text-black shadow-lg group-hover/btn:rotate-90 transition-transform duration-300">
                                                             <Plus size={18} strokeWidth={3} />

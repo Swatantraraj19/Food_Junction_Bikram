@@ -52,7 +52,7 @@ const Menu = ({ onOpenFullMenu }) => {
                                     {/* Price Tag */}
                                     <div className="absolute top-5 right-5 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-[10px] uppercase font-black shadow-lg text-brand-dark border border-gray-100 flex items-center gap-2">
                                         <span className="text-gray-400">Full</span>
-                                        <span className="text-brand-primary">{item.price}</span>
+                                        <span className="text-brand-primary font-bold tabular-nums">{item.price}</span>
                                     </div>
                                     
                                     {/* Premium Category Badge */}
