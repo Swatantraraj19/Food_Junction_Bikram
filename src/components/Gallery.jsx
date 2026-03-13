@@ -70,9 +70,9 @@ const Gallery = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-7xl font-serif font-bold text-brand-dark mb-8 leading-tight tracking-tight"
+                        className="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-8 leading-tight tracking-tight px-4"
                     >
-                        Glimpses of <span className="text-brand-primary italic">Food Junction</span>
+                        The <span className="text-brand-primary italic">Gallery</span>
                     </motion.h2>
                     
                     <motion.div
@@ -84,7 +84,7 @@ const Gallery = () => {
                     ></motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-16 lg:gap-24 px-2 md:px-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 px-4 md:px-0">
                     {images.map((img, idx) => (
                         <motion.div
                             key={idx}

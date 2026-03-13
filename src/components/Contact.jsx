@@ -48,7 +48,7 @@ const Contact = () => {
                                 <span className="text-brand-primary font-bold tracking-[0.4em] uppercase text-xs">Reach Out</span>
                                 <div className="w-8 h-[1px] bg-brand-primary"></div>
                             </div>
-                            <h2 className="text-5xl md:text-7xl font-serif font-bold text-brand-dark mb-8 leading-tight">
+                            <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-8 leading-tight">
                                 Join Us <br />
                                 <span className="text-brand-primary italic">at the Table</span>
                             </h2>

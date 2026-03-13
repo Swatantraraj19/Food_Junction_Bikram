@@ -13,12 +13,12 @@ const Menu = ({ onOpenFullMenu }) => {
             <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-brand-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-                <div className="text-center mb-10 md:mb-16">
+                <div className="text-center mb-12 md:mb-20">
                     <span className="text-brand-primary font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-3 block">Handpicked Specialties</span>
-                    <h2 className="text-3xl md:text-6xl font-serif font-bold text-brand-dark mb-4 leading-tight">
-                        Our Signature Dishes
+                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-4 leading-tight">
+                        Signature Dishes
                     </h2>
-                    <div className="w-12 md:w-24 h-1 bg-gradient-to-r from-brand-secondary to-brand-primary mx-auto rounded-full"></div>
+                    <div className="w-16 h-1 bg-brand-primary mx-auto rounded-full"></div>
                 </div>
 
 
@@ -39,8 +39,8 @@ const Menu = ({ onOpenFullMenu }) => {
                                 key={item.id}
                                 className="bg-white rounded-[1.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group border border-gray-100 flex flex-col h-full hover:-translate-y-2"
                             >
-                                {/* Image Container */}
-                                <div className="relative h-56 overflow-hidden">
+                                {/* Image Container - Optimized for mobile scannability */}
+                                <div className="relative h-48 md:h-56 overflow-hidden">
                                     <img
                                         src={item.image}
                                         alt={item.name}
@@ -66,10 +66,12 @@ const Menu = ({ onOpenFullMenu }) => {
                                     </div>
                                 </div>
                                 
-                                {/* Content Container */}
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <h3 className="text-xl font-bold text-brand-dark mb-2 font-serif transition-colors">{item.name}</h3>
-                                    <p className="text-gray-500 text-sm xl:text-base mb-6 line-clamp-2 leading-relaxed font-light flex-grow">{item.description}</p>
+                                {/* Content Container - Tighter horizontal/vertical spacing */}
+                                <div className="p-5 md:p-6 flex flex-col flex-grow">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h3 className="text-lg md:text-xl font-bold text-brand-dark font-serif transition-colors leading-tight">{item.name}</h3>
+                                    </div>
+                                    <p className="text-gray-500 text-xs md:text-sm lg:text-base mb-4 line-clamp-2 leading-relaxed font-light flex-grow">{item.description}</p>
                                     
                                     <div className="mt-auto">
                                         <button
