@@ -1,91 +1,98 @@
 export const menuData = [
     {
-        id: 1,
-        name: "Paneer Tikka Masala",
-        description: "Cottage cheese cubes marinated in spices and grilled in a tandoor.",
-        price: "₹280",
+        id: "mcv5",
+        name: "Paneer Butter Masala",
+        description: "Soft paneer cubes simmered in a rich, creamy tomato and butter gravy.",
+        price: "₹240",
         category: "Veg",
-        image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&q=80&w=500"
+        image: "/Paneer_B_Masala.jpg"
     },
     {
-        id: 2,
-        name: "Dal Makhani",
-        description: "Whole black lentils cooked with butter and cream.",
-        price: "₹220",
+        id: "mcv8",
+        name: "Paneer Kadhai",
+        description: "Paneer and peppers tossed in a robust gravy of pounded spices.",
+        price: "₹240",
         category: "Veg",
-        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=500"
+        image: "/Paneer_Kadhai.jpg"
     },
     {
-        id: 3,
-        name: "Vegetable Biryani",
-        description: "Aromatic basmati rice cooked with mixed vegetables and spices.",
+        id: "sv2-d",
+        name: "Paneer Chilli Dry",
+        description: "Cubes of paneer stir-fried with onions, bell peppers, and green chillies.",
+        price: "₹210",
+        category: "Veg",
+        image: "/Paneer_Chilli.jpg"
+    },
+    {
+        id: "br1",
+        name: "Hyderabadi Veg Biryani",
+        description: "Aromatic vegetable biryani prepared in authentic Hyderabadi style.",
+        price: "₹170",
+        category: "Veg",
+        image: "/Veg_Biryani.jpg"
+    },
+    {
+        id: "mcv16",
+        name: "Mushroom Kadhai",
+        description: "Fresh mushrooms cooked with bell peppers in a spicy kadhai gravy.",
+        price: "₹240",
+        category: "Veg",
+        image: "/Mashroom_Kadhai.jpg"
+    },
+    {
+        id: "sv7",
+        name: "Baby Corn Chilli",
+        description: "Tender baby corn stir-fried in a spicy soy and chilli glaze.",
+        price: "₹230",
+        category: "Veg",
+        image: "/Baby_Corn.jpg"
+    },
+    {
+        id: "sv1-d",
+        name: "Veg Manchurian Dry",
+        description: "Crispy vegetable balls tossed in a tangy and spicy manchurian sauce.",
+        price: "₹170",
+        category: "Veg",
+        image: "/Veg_Manchurian.jpg"
+    },
+    {
+        id: "ch1",
+        name: "Veg Chowmein",
+        description: "Stir-fried noodles with crisp vegetables and savory Chinese sauces.",
+        price: "₹100",
+        category: "Fast Food",
+        image: "/Veg_Chowmin.jpg"
+    },
+    {
+        id: "snv4",
+        name: "Chicken Lollipop",
+        description: "Crispy and juicy chicken drummettes served with hot schezwan sauce.",
+        price: "₹260",
+        category: "Non-Veg",
+        image: "/Chicken_Lolipop.jpg"
+    },
+    {
+        id: "mcnv3",
+        name: "Chicken Masala",
+        description: "Fresh chicken cooked in a traditional thick spicy gravy with Indian herbs.",
         price: "₹250",
-        category: "Veg",
-        image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=500"
-    },
-
-    {
-        id: 4,
-        name: "paneer Masala",
-        description: "Paneer cooked in a rich tomato and butter gravy.",
-        price: "₹280",
-        category: "Veg",
-        image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2023/07/paneer-butter-masala-recipe.jpg"
-        
-    },
-    {
-        id: 11,
-        name: "Chicken Butter Masala",
-        description: "Tender chicken pieces in a rich tomato and butter gravy.",
-        price: "₹350",
         category: "Non-Veg",
-        image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&q=80&w=500"
+        image: "/Chicken_masala.jpg"
     },
     {
-        id: 5,
-        name: "Mutton Rogan Josh",
-        description: "A Kashmiri delicacy of tender lamb cooked with aromatic spices.",
-        price: "₹450",
-        category: "Non-Veg",
-        image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?auto=format&fit=crop&q=80&w=500"
-    },
-    {
-        id: 6,
+        id: "br4",
         name: "Chicken Biryani",
-        description: "Classic flavorful biryani with succulent chicken pieces.",
-        price: "₹320",
+        description: "Fragrant basmati rice layered with juicy chicken and aromatic spices.",
+        price: "₹220",
         category: "Non-Veg",
-        image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&q=80&w=500"
+        image: "/Chicken_Biryani.jpg"
     },
     {
-        id: 7,
-        name: "Veg Cheese Burger",
-        description: "Crispy veggie patty with molten cheese and fresh veggies.",
-        price: "₹120",
-        category: "Fast Food",
-        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=500"
-    },
-    {
-        id: 8,
-        name: "Peri Peri Fries",
-        description: "Crispy french fries tossed in spicy peri peri masala.",
-        price: "₹99",
-        category: "Fast Food",
-        image: "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&q=80&w=500"
-    },
-    {
-        id: 9,
-        name: "Red Sauce Pasta",
-        description: "Penne pasta tossed in tangy tomato sauce and herbs.",
-        price: "₹180",
-        category: "Fast Food",
-        image: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&q=80&w=500"
-    },
-
-    {
-        id :10,
-        name :"Veg Biryani ",
-
+        id: "mcnv12",
+        name: "Egg Curry",
+        description: "Homestyle egg curry cooked with boiled eggs in a delicately spiced onion-tomato gravy.",
+        price: "₹130",
+        category: "Non-Veg",
+        image: "/Egg_Curry.jpg"
     }
-
 ];

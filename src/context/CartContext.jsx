@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 // 1. Create the Context (the empty memory bank)
@@ -9,8 +9,27 @@ export const useCart = () => useContext(CartContext);
 
 // 3. Create the Provider (the manager of the memory bank)
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  // 4. Initialize state from LocalStorage (The Notebook)
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('fj_cart_items');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
+  const [orderNotes, setOrderNotes] = useState(() => {
+    const savedNotes = localStorage.getItem('fj_order_notes');
+    return savedNotes || '';
+  });
+
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // 5. Save to LocalStorage whenever items or notes change
+  useEffect(() => {
+    localStorage.setItem('fj_cart_items', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem('fj_order_notes', orderNotes);
+  }, [orderNotes]);
 
   // A function to add an item to the order list
   const addToCart = (item) => {
@@ -29,8 +48,9 @@ export const CartProvider = ({ children }) => {
       return [...prevList, { ...item, quantity: 1 }];
     });
 
-    // Trigger the popup notification we installed in Step 2!
+    // Trigger the popup notification with a fast 1s duration
     toast.success(`${item.name} added to cart!`, {
+      duration: 1000,
       style: { background: '#1F2937', color: '#fff' },
       iconTheme: { primary: '#EF4444', secondary: '#fff' },
     });
@@ -40,6 +60,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (itemId) => {
     setCartItems((prevList) => prevList.filter((item) => item.id !== itemId));
     toast.error('Item removed from cart', {
+        duration: 1000,
         style: { background: '#1F2937', color: '#fff' },
     });
   };
@@ -55,6 +76,17 @@ export const CartProvider = ({ children }) => {
           return item;
         })
         .filter((item) => item.quantity > 0); // Remove item automatically if it drops below 1
+    });
+  };
+
+
+  // A function to clear the entire cart
+  const clearCart = () => {
+    setCartItems([]);
+    setOrderNotes('');
+    toast.error('Cart cleared', {
+        duration: 1000,
+        style: { background: '#1F2937', color: '#fff' },
     });
   };
 
@@ -80,7 +112,10 @@ export const CartProvider = ({ children }) => {
         isCartOpen, 
         toggleCart, 
         cartTotal, 
-        cartCount 
+        cartCount,
+        clearCart,
+        orderNotes,
+        setOrderNotes
       }}
     >
       {children}

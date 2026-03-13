@@ -3,15 +3,8 @@ import { menuData } from '../data/menuData';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 
-const Menu = () => {
+const Menu = ({ onOpenFullMenu }) => {
     const { addToCart } = useCart();
-    const [filter, setFilter] = useState('All');
-
-    const filteredItems = filter === 'All'
-        ? menuData
-        : menuData.filter(item => item.category === filter);
-
-    const categories = ['All', 'Veg', 'Non-Veg', 'Fast Food'];
 
     return (
         <section id="menu" className="py-16 bg-brand-light relative overflow-hidden">
@@ -20,72 +13,74 @@ const Menu = () => {
             <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-brand-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-                <div className="text-center mb-12">
-                    <span className="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block">Delicious Choices</span>
-                    <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-4">
-                        Explore Our Menu
+                <div className="text-center mb-10 md:mb-16">
+                    <span className="text-brand-primary font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-3 block">Handpicked Specialties</span>
+                    <h2 className="text-3xl md:text-6xl font-serif font-bold text-brand-dark mb-4 leading-tight">
+                        Our Signature Dishes
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-to-r from-brand-secondary to-brand-primary mx-auto rounded-full"></div>
+                    <div className="w-12 md:w-24 h-1 bg-gradient-to-r from-brand-secondary to-brand-primary mx-auto rounded-full"></div>
                 </div>
 
-                {/* Filter Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 mb-12">
-                    {categories.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => setFilter(cat)}
-                            className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${filter === cat
-                                ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/30 scale-105'
-                                : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-brand-primary border border-gray-200'
-                                }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
 
-                {/* Menu Grid */}
+
+                {/* Premium Menu Grid */}
                 <motion.div
                     layout
-                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                    className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
                 >
                     <AnimatePresence>
-                        {filteredItems.map((item) => (
+                        {menuData.map((item) => (
                             <motion.div
                                 layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                transition={{ duration: 0.4 }}
                                 key={item.id}
-                                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group ring-1 ring-gray-100"
+                                className="bg-white rounded-[1.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group border border-gray-100 flex flex-col h-full hover:-translate-y-2"
                             >
+                                {/* Image Container */}
                                 <div className="relative h-56 overflow-hidden">
                                     <img
                                         src={item.image}
                                         alt={item.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4"></div>
-                                    <div className="absolute top-4 right-4 bg-white px-4 py-1 rounded-full text-sm font-bold shadow-md text-brand-dark">
-                                        {item.price}
+                                    {/* Subtle Vignette */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                                    
+                                    {/* Price Tag */}
+                                    <div className="absolute top-5 right-5 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-[10px] uppercase font-black shadow-lg text-brand-dark border border-gray-100 flex items-center gap-2">
+                                        <span className="text-gray-400">Full</span>
+                                        <span className="text-brand-primary">{item.price}</span>
                                     </div>
-                                    <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md uppercase tracking-wide ${item.category === 'Veg' ? 'bg-green-600' :
-                                        item.category === 'Non-Veg' ? 'bg-red-600' :
-                                            'bg-yellow-500'
-                                        }`}>
+                                    
+                                    {/* Premium Category Badge */}
+                                    <div className={`absolute top-5 left-5 px-3 py-1.5 rounded-full text-[10px] font-bold text-white shadow-lg uppercase tracking-widest flex items-center gap-1.5 backdrop-blur-md ${
+                                        item.category === 'Veg' ? 'bg-green-600/90 border border-green-400/30' :
+                                        item.category === 'Non-Veg' ? 'bg-red-600/90 border border-red-400/30' :
+                                        'bg-brand-secondary/90 border border-amber-400/30'
+                                    }`}>
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                                         {item.category}
                                     </div>
                                 </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-brand-dark mb-2 font-serif group-hover:text-brand-primary transition-colors">{item.name}</h3>
-                                    <p className="text-gray-500 text-sm mb-6 line-clamp-2 leading-relaxed">{item.description}</p>
-                                    <div className="flex items-center justify-between">
+                                
+                                {/* Content Container */}
+                                <div className="p-6 flex flex-col flex-grow">
+                                    <h3 className="text-xl font-bold text-brand-dark mb-2 font-serif transition-colors">{item.name}</h3>
+                                    <p className="text-gray-500 text-sm xl:text-base mb-6 line-clamp-2 leading-relaxed font-light flex-grow">{item.description}</p>
+                                    
+                                    <div className="mt-auto">
                                         <button
-                                            onClick={() => addToCart(item)}
-                                            className="w-full bg-brand-light text-brand-dark hover:bg-brand-primary hover:text-white font-medium py-3 rounded-xl transition-colors duration-300 flex items-center justify-center space-x-2"
+                                            onClick={() => {
+                                                const skipLabel = ['Veg', 'Non-Veg', 'Fast Food'].includes(item.category) === false;
+                                                const finalName = skipLabel ? item.name : `${item.name} (Full)`;
+                                                addToCart({ ...item, name: finalName });
+                                            }}
+                                            className="w-full bg-brand-light text-brand-dark hover:bg-brand-primary hover:text-white font-bold tracking-wide py-3.5 rounded-xl transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-brand-primary/30 uppercase text-sm"
                                         >
-                                            <span>Add to Order</span>
+                                            Add to Order
                                         </button>
                                     </div>
                                 </div>
@@ -94,10 +89,15 @@ const Menu = () => {
                     </AnimatePresence>
                 </motion.div>
 
-                <div className="text-center mt-12">
-                    <a href="#" className="inline-flex items-center text-brand-primary font-semibold hover:text-brand-dark transition-colors">
-                        View Full Menu <span className="ml-2 text-xl">→</span>
-                    </a>
+                {/* View Full Menu Link */}
+                <div className="text-center mt-16">
+                    <button 
+                        onClick={onOpenFullMenu} 
+                        className="inline-flex items-center text-brand-dark font-bold tracking-wide uppercase text-sm hover:text-brand-primary transition-colors group cursor-pointer bg-transparent border-none"
+                    >
+                        <span className="border-b-2 border-brand-dark group-hover:border-brand-primary pb-1 transition-colors">View Full Menu</span>
+                        <span className="ml-3 transform group-hover:translate-x-2 transition-transform">→</span>
+                    </button>
                 </div>
             </div>
         </section>

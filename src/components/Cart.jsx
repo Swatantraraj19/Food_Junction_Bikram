@@ -2,133 +2,257 @@ import { useCart } from '../context/CartContext';
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// 1. Standalone CartFooter for clean architecture
+const CartFooter = ({ cartTotal, cartItems, orderNotes, clearCart, toggleCart }) => {
+  const handleConfirmOrder = () => {
+    const whatsappNumber = "917091380430";
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateStr = now.toLocaleDateString([], { day: '2-digit', month: 'short' });
+    
+    // Premium formatted message for the merchant
+    let message = `*NEW ORDER - FOOD JUNCTION BIKRAM*\n`;
+    message += `─────────────────────────\n`;
+    message += `*${dateStr} | ${timeStr}*\n`;
+    message += `─────────────────────────\n\n`;
+    message += `*ITEMS:*\n`;
+    
+    cartItems.forEach(item => {
+      const priceNum = parseInt(item.price.replace(/[^0-9]/g, ''), 10);
+      const lineTotal = priceNum * item.quantity;
+      message += `• ${item.quantity} x ${item.name} (₹${priceNum}) = *₹${lineTotal}*\n`;
+    });
+    
+    message += `\n*NOTES:*\n_${orderNotes || 'No special requests'}_\n`;
+    message += `\n*TOTAL AMOUNT: ₹${cartTotal}*\n`;
+    message += `─────────────────────────\n`;
+    message += `_This order was generated via the Food Junction Digital Menu_`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+
+    // Safety cleanup: wait 1 second then clear and close
+    setTimeout(() => {
+      clearCart();
+      toggleCart();
+    }, 1000);
+  };
+
+  return (
+    <div className="p-5 md:p-6 bg-white border-t border-gray-100 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] sticky bottom-0 z-20">
+      <div className="space-y-3 mb-6">
+        <div className="flex justify-between items-center py-1 px-2 md:px-3">
+          <span className="font-serif font-bold text-lg text-brand-dark tracking-tight">Total Amount</span>
+          <span className="font-serif font-bold text-3xl text-brand-primary drop-shadow-sm">₹{cartTotal}</span>
+        </div>
+      </div>
+      
+      <button 
+        onClick={handleConfirmOrder}
+        className="w-full group relative bg-brand-dark hover:bg-brand-primary text-white py-4 px-8 rounded-2xl font-bold transition-all duration-500 transform active:scale-[0.98] shadow-2xl shadow-black/20 overflow-hidden"
+      >
+        <div className="relative z-10 flex items-center justify-between">
+          <span className="tracking-[0.15em] uppercase text-[12px] font-black">Confirm Order</span>
+          <div className="flex items-center gap-3">
+            <div className="w-1 h-1 rounded-full bg-white animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
+            <span className="text-xl font-serif">₹{cartTotal}</span>
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+      </button>
+      <p className="text-[10px] text-gray-400 mt-4 text-center uppercase tracking-[0.2em] font-bold italic opacity-60">Handcrafted with passion</p>
+    </div>
+  );
+};
+
 const Cart = () => {
-  const { isCartOpen, toggleCart, cartItems, updateQuantity, removeFromCart, cartTotal } = useCart();
+  const { isCartOpen, toggleCart, cartItems, updateQuantity, removeFromCart, cartTotal, clearCart, orderNotes, setOrderNotes } = useCart();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: 20 },
+    show: { opacity: 1, x: 0 }
+  };
 
   return (
     <AnimatePresence>
       {isCartOpen && (
         <>
-          {/* A dark faded background behind the cart list */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={toggleCart}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 cursor-pointer"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] cursor-pointer"
           />
 
-          {/* The actual sliding white panel of the cart */}
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-50 flex flex-col"
+            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-[101] flex flex-col"
           >
-            {/* The Top Header of the Cart (Says "Your Order" and has a big X button to close) */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-brand-light/20">
-              <div className="flex items-center space-x-3">
-                <div className="bg-brand-primary/10 p-2 rounded-full">
-                  <ShoppingBag className="text-brand-primary" size={24} />
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 md:p-7 border-b border-gray-100 bg-white sticky top-0 z-30 pt-8 md:pt-7">
+              <div className="flex items-center space-x-4">
+                <div className="bg-brand-primary/10 p-3 rounded-2xl shadow-inner">
+                  <ShoppingBag className="text-brand-primary" size={26} />
                 </div>
-                <h2 className="text-xl font-bold font-serif text-brand-dark">Your Order</h2>
+                <div>
+                  <h2 className="text-2xl font-bold font-serif text-brand-dark tracking-tight">Your Order</h2>
+                  {cartItems.length > 0 && (
+                    <span className="text-[10px] text-gray-400 uppercase tracking-[0.15em] font-black block whitespace-nowrap">
+                      {cartItems.length} {cartItems.length === 1 ? 'Item' : 'Items'}
+                    </span>
+                  )}
+                </div>
               </div>
-              <button 
-                onClick={toggleCart}
-                className="p-2 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-colors"
-              >
-                <X size={24} />
-              </button>
+              <div className="flex items-center gap-3">
+                {cartItems.length > 0 && (
+                  <button 
+                    onClick={clearCart}
+                    className="p-3 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all group lg:border lg:border-transparent lg:hover:border-red-100"
+                    title="Clear Cart"
+                  >
+                    <Trash2 size={22} className="group-hover:scale-110 transition-transform" />
+                  </button>
+                )}
+                <button 
+                  onClick={toggleCart}
+                  className="p-3 bg-gray-50 hover:bg-gray-100 text-gray-500 rounded-2xl transition-all hover:rotate-90 duration-300"
+                >
+                  <X size={22} />
+                </button>
+              </div>
             </div>
 
-            {/* The Middle Scrollable Area: Shows a list of the actual food they added */}
-            <div className="flex-1 overflow-y-auto p-6">
+            {/* Content Area                {/* Custom Styled Scrollbar for Premium Feel */}
+            <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar scroll-smooth">
               {cartItems.length === 0 ? (
-                // IF CART IS EMPTY: Show a friendly message
-                <div className="h-full flex flex-col items-center justify-center text-gray-500 space-y-4">
-                  <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-4">
-                    <ShoppingBag size={40} className="text-gray-300" />
-                  </div>
-                  <p className="text-lg font-medium">Your cart is feeling light!</p>
-                  <p className="text-sm">Let's add some delicious food to it.</p>
-                  <button 
-                    onClick={toggleCart}
-                    className="mt-6 text-brand-primary font-semibold hover:underline"
+                <div className="h-full flex flex-col items-center justify-center text-center">
+                  <motion.div 
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="w-32 h-32 bg-gray-50 rounded-[2.5rem] flex items-center justify-center mb-8 relative"
                   >
-                    Browse Menu
-                  </button>
+                    <ShoppingBag size={48} className="text-gray-200" />
+                    <motion.div 
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ repeat: Infinity, duration: 2 }}
+                      className="absolute -top-2 -right-2 bg-brand-primary/10 p-3 rounded-full"
+                    >
+                      <Plus size={20} className="text-brand-primary" />
+                    </motion.div>
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-brand-dark mb-2">Your cart is empty</h3>
+                  <p className="text-gray-400 text-sm max-w-[200px] mb-8">Looks like you haven't added anything to your order yet.</p>
+                  <a 
+                    href="#menu"
+                    onClick={toggleCart}
+                    className="px-8 py-3 bg-brand-primary text-white rounded-xl font-bold shadow-lg shadow-red-500/20 hover:shadow-xl hover:bg-red-600 transition-all active:scale-95 inline-block"
+                  >
+                    Explore Menu
+                  </a>
                 </div>
               ) : (
-                // IF CART HAS ITEMS: Show the items in a styled list
-                <div className="space-y-6">
-                  {cartItems.map((item) => (
-                    <motion.div 
-                      layout
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      key={item.id} 
-                      className="flex space-x-4 bg-white p-3 rounded-2xl border border-gray-100 shadow-sm"
-                    >
-                      {/* Food Image */}
-                      <div className="h-20 w-20 rounded-xl overflow-hidden flex-shrink-0 bg-gray-50">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                      </div>
-                      
-                      {/* Food Details (Name, Price, Add/Remove Buttons) */}
-                      <div className="flex-1 flex flex-col justify-between py-1">
-                        <div className="flex justify-between items-start">
-                          <h3 className="font-bold text-gray-800 leading-tight">{item.name}</h3>
-                          <button 
-                            onClick={() => removeFromCart(item.id)}
-                            className="text-gray-300 hover:text-red-500 transition-colors p-1"
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
-                        
-                        <div className="flex items-center justify-between mt-2">
-                          <p className="font-bold text-brand-primary text-sm">{item.price}</p>
-                          
-                          {/* Plus and Minus buttons to change quantity */}
-                          <div className="flex items-center space-x-3 bg-gray-50 rounded-full px-2 py-1 border border-gray-100">
+                <div className="space-y-4 p-6">
+                  <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="show"
+                    className="space-y-2.5"
+                  >
+                    {cartItems.map((item) => (
+                      <motion.div 
+                        layout
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.01 }}
+                        key={`${item.id}-${item.price}`} 
+                        className="bg-white p-3.5 rounded-2xl border border-gray-50 shadow-sm hover:shadow-lg hover:border-brand-primary/10 transition-all duration-300 group relative"
+                      >
+                        <div className="flex flex-col space-y-2.5">
+                          <div className="flex justify-between items-start gap-4">
+                            <div className="min-w-0">
+                              <h3 className="font-bold text-brand-dark text-sm md:text-base leading-tight transition-colors">{item.name}</h3>
+                              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.15em] mt-1 line-clamp-1">{item.category}</p>
+                            </div>
                             <button 
-                              onClick={() => updateQuantity(item.id, -1)}
-                              className="p-1 rounded-full text-gray-500 hover:text-brand-dark hover:bg-gray-200 transition-colors"
+                              onClick={() => removeFromCart(item.id)}
+                              className="text-gray-200 hover:text-red-500 transition-all p-1.5 hover:bg-red-50 rounded-lg flex-shrink-0"
                             >
-                              <Minus size={14} />
-                            </button>
-                            <span className="font-bold text-sm min-w-[20px] text-center">{item.quantity}</span>
-                            <button 
-                              onClick={() => updateQuantity(item.id, 1)}
-                              className="p-1 rounded-full text-gray-500 hover:text-brand-dark hover:bg-gray-200 transition-colors"
-                            >
-                              <Plus size={14} />
+                              <X size={16} />
                             </button>
                           </div>
+                          
+                          <div className="flex items-center justify-between border-t border-gray-50 pt-2.5">
+                            <p className="font-black text-brand-primary text-lg tracking-tight">
+                              {typeof item.price === 'string' ? item.price : `₹${item.price}`}
+                            </p>
+                            
+                            <div className="flex items-center gap-2 bg-gray-50/50 p-1 rounded-xl border border-gray-50 shadow-inner">
+                              <button 
+                                onClick={() => updateQuantity(item.id, -1)}
+                                className="w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-brand-dark hover:bg-white transition-all shadow-sm active:scale-90"
+                              >
+                                <Minus size={12} />
+                              </button>
+                              <span className="font-bold text-sm min-w-[24px] text-center text-brand-dark">{item.quantity}</span>
+                              <button 
+                                onClick={() => updateQuantity(item.id, 1)}
+                                className="w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-brand-dark hover:bg-white transition-all shadow-sm active:scale-90"
+                              >
+                                <Plus size={12} />
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    ))}
+                  </motion.div>
+
+                   {/* Premium Medal Aesthetic for EST Year */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 flex flex-col items-center justify-center rounded-full bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(212,175,55,0.1)] border-8 border-[#faf9f6] z-10 group-hover:scale-110 transition-transform duration-700">
+                    <div className="absolute inset-2 border border-brand-primary/20 rounded-full border-dashed animate-[spin_10s_linear_infinite]"></div>
+                    <span className="text-3xl font-black text-brand-dark tracking-tighter leading-none mb-1">2026</span>
+                    <div className="h-[2px] w-8 bg-brand-primary/30 mb-1 rounded-full"></div>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Est. Year</span>
+                </div>
+                   <div className="bg-gray-50/50 rounded-2xl p-4 border border-gray-100/50 shadow-inner">
+                     <div className="flex items-center gap-2 mb-3 px-1">
+                       <div className="w-1 h-3 bg-brand-primary rounded-full"></div>
+                       <label className="text-[11px] font-black text-brand-dark/50 uppercase tracking-[0.15em] block">Kitchen Notes</label>
+                     </div>
+                     <textarea 
+                       value={orderNotes}
+                       onChange={(e) => setOrderNotes(e.target.value)}
+                       placeholder="e.g., Make it extra spicy, less oil, etc."
+                       className="w-full bg-white border border-gray-100 rounded-xl p-4 text-sm focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary/20 outline-none transition-all resize-none h-24 text-brand-dark shadow-sm placeholder:text-gray-300 font-medium"
+                     ></textarea>
+                   </div>
                 </div>
               )}
             </div>
 
-            {/* The Bottom Sticky Area: Shows the Total Bill and the green Checkout Button */}
-            {cartItems.length > 0 && (
-              <div className="p-6 bg-white border-t border-gray-100 shadow-[0_-10px_30px_rgba(0,0,0,0.02)]">
-                <div className="flex justify-between items-center mb-4 text-lg">
-                  <span className="text-gray-600 font-medium">Subtotal</span>
-                  <span className="font-bold font-serif text-2xl text-brand-dark">₹{cartTotal}</span>
-                </div>
-                <p className="text-sm text-gray-400 mb-6 text-center">Taxes and delivery calculated at checkout</p>
-                
-                <button className="w-full bg-brand-dark hover:bg-brand-primary text-white py-4 rounded-xl font-bold flex items-center justify-center space-x-2 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                  <span>Proceed to Checkout</span>
-                  <span className="bg-white/20 px-2 py-0.5 rounded text-sm ml-2">₹{cartTotal}</span>
-                </button>
-              </div>
-            )}
+            {/* Footer Section with improved spacing and separation */}
+            <div className="mt-auto border-t border-gray-100 shadow-[0_-15px_30px_rgba(0,0,0,0.03)] bg-white pt-2">
+              <CartFooter 
+                cartTotal={cartTotal} 
+                cartItems={cartItems} 
+                orderNotes={orderNotes} 
+                clearCart={clearCart} 
+                toggleCart={toggleCart} 
+              />
+            </div>
           </motion.div>
         </>
       )}

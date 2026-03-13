@@ -19,10 +19,12 @@ const About = () => {
                                 className="rounded-2xl shadow-lg w-full h-72 md:h-90 object-cover transform translate-y-8 md:translate-y-12 hover:scale-105 transition-transform duration-500"
                             />
                         </div>
-                        {/* Premium Badge */}
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-2xl text-center w-36 h-36 flex flex-col justify-center items-center border-[6px] border-white ring-1 ring-gray-100 z-10">
-                            <span className="text-4xl font-extrabold text-brand-primary drop-shadow-sm">2026</span>
-                            <span className="text-xs text-brand-dark font-bold uppercase tracking-widest mt-1">Est. Year</span>
+                        {/* Premium Medal Aesthetic for EST Year */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 md:w-40 md:h-40 flex flex-col items-center justify-center rounded-full bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(212,175,55,0.05)] border-8 border-white z-10 group hover:scale-110 transition-transform duration-700">
+                            <div className="absolute inset-1.5 border border-brand-primary/20 rounded-full border-dashed animate-[spin_10s_linear_infinite]"></div>
+                            <span className="text-3xl md:text-4xl font-black text-brand-dark tracking-tighter leading-none mb-0.5">2026</span>
+                            <div className="h-[2px] w-6 bg-brand-primary/30 mb-0.5 rounded-full"></div>
+                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">Est. Year</span>
                         </div>
                     </div>
 
