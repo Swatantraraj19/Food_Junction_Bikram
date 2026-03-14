@@ -10,12 +10,12 @@ const About = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <img
                                 src="/About_img1.jpeg"
-                                alt="Restaurant Ambience"
+                                alt="Premium Restaurant Ambience at Food Junction Bikram, Patna"
                                 className="rounded-2xl shadow-lg w-full h-72 md:h-90 object-cover hover:scale-105 transition-transform duration-500"
                             />
                             <img
                                 src="/About_img2.webp"
-                                alt="Delicious Meal"
+                                alt="Delicious Multi-Cuisine Meal served at Food Junction"
                                 className="rounded-2xl shadow-lg w-full h-72 md:h-90 object-cover transform translate-y-8 md:translate-y-12 hover:scale-105 transition-transform duration-500"
                             />
                         </div>

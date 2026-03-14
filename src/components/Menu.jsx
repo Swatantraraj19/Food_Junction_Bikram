@@ -43,8 +43,9 @@ const Menu = ({ onOpenFullMenu }) => {
                                 <div className="relative h-48 md:h-56 overflow-hidden">
                                     <img
                                         src={item.image}
-                                        alt={item.name}
+                                        alt={`${item.name} - Signature Dish at Food Junction Bikram, Patna`}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                        loading="lazy"
                                     />
                                     {/* Subtle Vignette */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>

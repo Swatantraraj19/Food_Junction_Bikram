@@ -32,7 +32,7 @@ const Navbar = () => {
                         <a href="#home" className="flex items-center">
                             <img 
                                 src="/FJ_logo.png" 
-                                alt="Food Junction Logo" 
+                                alt="Food Junction Bikram - Authentic Restaurant in Patna" 
                                 className="h-14 md:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105" 
                             />
                         </a>
