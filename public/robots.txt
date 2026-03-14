@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://swatantraraj19.github.io/Food_Junction_Bikram/sitemap.xml
+Sitemap: https://foodjunctionbikram.in/sitemap.xml
